@@ -8,9 +8,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"google.golang.org/protobuf/encoding/protojson"
 
-	pb "github.com/rustagram/api-gateway/genproto"
-	l "github.com/rustagram/api-gateway/pkg/logger"
-	"github.com/rustagram/api-gateway/pkg/utils"
+	pb "github.com/sulton0011/api-gateway/genproto"
+	l "github.com/sulton0011/api-gateway/pkg/logger"
+	"github.com/sulton0011/api-gateway/pkg/utils"
 )
 
 // CreateUser creates user

@@ -3,8 +3,8 @@ package services
 import (
 	"fmt"
 
-	"github.com/rustagram/api-gateway/config"
-	pb "github.com/rustagram/api-gateway/genproto"
+	"github.com/sulton0011/api-gateway/config"
+	pb "github.com/sulton0011/api-gateway/genproto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/resolver"

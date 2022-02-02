@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/rustagram/api-gateway/api"
-	"github.com/rustagram/api-gateway/config"
-	"github.com/rustagram/api-gateway/pkg/logger"
-	"github.com/rustagram/api-gateway/services"
+	"github.com/sulton0011/api-gateway/api"
+	"github.com/sulton0011/api-gateway/config"
+	"github.com/sulton0011/api-gateway/pkg/logger"
+	"github.com/sulton0011/api-gateway/services"
 )
 
 func main() {

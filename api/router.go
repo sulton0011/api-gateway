@@ -2,10 +2,10 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	v1 "github.com/rustagram/api-gateway/api/handlers/v1"
-	"github.com/rustagram/api-gateway/config"
-	"github.com/rustagram/api-gateway/pkg/logger"
-	"github.com/rustagram/api-gateway/services"
+	v1 "github.com/sulton0011/api-gateway/api/handlers/v1"
+	"github.com/sulton0011/api-gateway/config"
+	"github.com/sulton0011/api-gateway/pkg/logger"
+	"github.com/sulton0011/api-gateway/services"
 )
 
 // Option ...
