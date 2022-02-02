@@ -29,11 +29,11 @@ func New(option Option) *gin.Engine {
 	})
 
 	api := router.Group("/v1")
-	api.POST("/users", handlerV1.CreateUser)
-	api.GET("/users/:id", handlerV1.GetUser)
-	api.GET("/users", handlerV1.ListUsers)
-	api.PUT("/users/:id", handlerV1.UpdateUser)
-	api.DELETE("/users/:id", handlerV1.DeleteUser)
+	api.POST("/tasks", handlerV1.CreateTask)
+	api.GET("/tasks/:id", handlerV1.GetTask)
+	api.GET("/tasks", handlerV1.ListTasks)
+	api.PUT("/tasks/:id", handlerV1.UpdateTask)
+	api.DELETE("/tasks/:id", handlerV1.DeleteTask)
 
 	return router
 }

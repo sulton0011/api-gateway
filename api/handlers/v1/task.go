@@ -8,16 +8,16 @@ import (
 	"github.com/gin-gonic/gin"
 	"google.golang.org/protobuf/encoding/protojson"
 
-	pb "github.com/sulton0011/api-gateway/genproto"
+	pb "github.com/sulton0011/api-gateway/genproto/task"
 	l "github.com/sulton0011/api-gateway/pkg/logger"
 	"github.com/sulton0011/api-gateway/pkg/utils"
 )
 
-// CreateUser creates user
-// route /v1/users [post]
-func (h *handlerV1) CreateUser(c *gin.Context) {
+// CreateTask creates task
+// route /v1/tasks [post]
+func (h *handlerV1) CreateTask(c *gin.Context) {
 	var (
-		body        pb.User
+		body        pb.Task
 		jspbMarshal protojson.MarshalOptions
 	)
 	jspbMarshal.UseProtoNames = true
@@ -33,21 +33,21 @@ func (h *handlerV1) CreateUser(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.UserService().Create(ctx, &body)
+	response, err := h.serviceManager.TaskService().Create(ctx, &body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to create user", l.Error(err))
+		h.log.Error("failed to create Task", l.Error(err))
 		return
 	}
 
 	c.JSON(http.StatusCreated, response)
 }
 
-// GetUser gets user by id
-// route /v1/users/{id} [get]
-func (h *handlerV1) GetUser(c *gin.Context) {
+// GetTask gets Task by id
+// route /v1/Tasks/{id} [get]
+func (h *handlerV1) GetTask(c *gin.Context) {
 	var jspbMarshal protojson.MarshalOptions
 	jspbMarshal.UseProtoNames = true
 
@@ -55,24 +55,24 @@ func (h *handlerV1) GetUser(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.UserService().Get(
-		ctx, &pb.ByIdReq{
+	response, err := h.serviceManager.TaskService().Get(
+		ctx, &pb.IdReq{
 			Id: guid,
 		})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to get user", l.Error(err))
+		h.log.Error("failed to get Task", l.Error(err))
 		return
 	}
 
 	c.JSON(http.StatusOK, response)
 }
 
-// ListUsers returns list of users
-// route /v1/users/ [get]
-func (h *handlerV1) ListUsers(c *gin.Context) {
+// ListTasks returns list of Tasks
+// route /v1/Tasks/ [get]
+func (h *handlerV1) ListTasks(c *gin.Context) {
 	queryParams := c.Request.URL.Query()
 
 	params, errStr := utils.ParseQueryParams(queryParams)
@@ -90,7 +90,7 @@ func (h *handlerV1) ListUsers(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.UserService().List(
+	response, err := h.serviceManager.TaskService().List(
 		ctx, &pb.ListReq{
 			Limit: params.Limit,
 			Page:  params.Page,
@@ -99,18 +99,18 @@ func (h *handlerV1) ListUsers(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to list users", l.Error(err))
+		h.log.Error("failed to list Tasks", l.Error(err))
 		return
 	}
 
 	c.JSON(http.StatusOK, response)
 }
 
-// UpdateUser updates user by id
-// route /v1/users/{id} [put]
-func (h *handlerV1) UpdateUser(c *gin.Context) {
+// UpdateTask updates Task by id
+// route /v1/Tasks/{id} [put]
+func (h *handlerV1) UpdateTask(c *gin.Context) {
 	var (
-		body        pb.User
+		body        pb.Task
 		jspbMarshal protojson.MarshalOptions
 	)
 	jspbMarshal.UseProtoNames = true
@@ -128,21 +128,21 @@ func (h *handlerV1) UpdateUser(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.UserService().Update(ctx, &body)
+	response, err := h.serviceManager.TaskService().Update(ctx, &body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to update user", l.Error(err))
+		h.log.Error("failed to update Task", l.Error(err))
 		return
 	}
 
 	c.JSON(http.StatusOK, response)
 }
 
-// DeleteUser deletes user by id
-// route /v1/users/{id} [delete]
-func (h *handlerV1) DeleteUser(c *gin.Context) {
+// DeleteTask deletes Task by id
+// route /v1/Tasks/{id} [delete]
+func (h *handlerV1) DeleteTask(c *gin.Context) {
 	var jspbMarshal protojson.MarshalOptions
 	jspbMarshal.UseProtoNames = true
 
@@ -150,15 +150,15 @@ func (h *handlerV1) DeleteUser(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.UserService().Delete(
-		ctx, &pb.ByIdReq{
+	response, err := h.serviceManager.TaskService().Delete(
+		ctx, &pb.IdReq{
 			Id: guid,
 		})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to delete user", l.Error(err))
+		h.log.Error("failed to delete Task", l.Error(err))
 		return
 	}
 

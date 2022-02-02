@@ -10,8 +10,8 @@ import (
 type Config struct {
 	Environment string // develop, staging, production
 
-	UserServiceHost string
-	UserServicePort int
+	TaskServiceHost string
+	TaskServicePort int
 
 	// context timeout in seconds
 	CtxTimeout int
@@ -28,8 +28,8 @@ func Load() Config {
 
 	c.LogLevel = cast.ToString(getOrReturnDefault("LOG_LEVEL", "debug"))
 	c.HTTPPort = cast.ToString(getOrReturnDefault("HTTP_PORT", ":8080"))
-	c.UserServiceHost = cast.ToString(getOrReturnDefault("USER_SERVICE_HOST", "localhost"))
-	c.UserServicePort = cast.ToInt(getOrReturnDefault("USER_SERVICE_PORT", 9000))
+	c.TaskServiceHost = cast.ToString(getOrReturnDefault("Task_SERVICE_HOST", "localhost"))
+	c.TaskServicePort = cast.ToInt(getOrReturnDefault("Task_SERVICE_PORT", 9000))
 
 	c.CtxTimeout = cast.ToInt(getOrReturnDefault("CTX_TIMEOUT", 7))
 

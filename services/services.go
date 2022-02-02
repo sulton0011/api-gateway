@@ -4,36 +4,36 @@ import (
 	"fmt"
 
 	"github.com/sulton0011/api-gateway/config"
-	pb "github.com/sulton0011/api-gateway/genproto"
+	pb "github.com/sulton0011/api-gateway/genproto/task"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/resolver"
 )
 
 type IServiceManager interface {
-	UserService() pb.UserServiceClient
+	TaskService() pb.TaskServiceClient
 }
 
 type serviceManager struct {
-	userService pb.UserServiceClient
+	TasksService pb.TaskServiceClient
 }
 
-func (s *serviceManager) UserService() pb.UserServiceClient {
-	return s.userService
+func (s *serviceManager) TaskService() pb.TaskServiceClient {
+	return s.TasksService
 }
 
 func NewServiceManager(conf *config.Config) (IServiceManager, error) {
 	resolver.SetDefaultScheme("dns")
 
-	connUser, err := grpc.Dial(
-		fmt.Sprintf("%s:%d", conf.UserServiceHost, conf.UserServicePort),
+	connTask, err := grpc.Dial(
+		fmt.Sprintf("%s:%d", conf.TaskServiceHost, conf.TaskServicePort),
 		grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
 	}
 
 	serviceManager := &serviceManager{
-		userService: pb.NewUserServiceClient(connUser),
+		TasksService: pb.NewTaskServiceClient(connTask),
 	}
 
 	return serviceManager, nil
