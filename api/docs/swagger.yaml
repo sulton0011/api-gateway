@@ -1,0 +1,195 @@
+definitions:
+  model.ListResp:
+    properties:
+      count:
+        type: integer
+      tasks:
+        items:
+          $ref: '#/definitions/model.Task'
+        type: array
+    type: object
+  model.StandardErrorModel:
+    properties:
+      error:
+        type: string
+    type: object
+  model.Task:
+    properties:
+      assignee:
+        type: string
+      created_at:
+        type: string
+      deadline:
+        type: string
+      id:
+        type: string
+      status:
+        type: string
+      summary:
+        type: string
+      title:
+        type: string
+    type: object
+  model.TaskCreat:
+    properties:
+      assignee:
+        type: string
+      deadline:
+        type: string
+      status:
+        type: string
+      summary:
+        type: string
+      title:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /v1/tasks:
+    post:
+      consumes:
+      - application/json
+      description: This API for creating a new task
+      parameters:
+      - description: taskCreateRequest
+        in: body
+        name: reques
+        required: true
+        schema:
+          $ref: '#/definitions/model.TaskCreat'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Task'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.StandardErrorModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.StandardErrorModel'
+      summary: TaskCreat
+      tags:
+      - task
+  /v1/tasks/:
+    get:
+      consumes:
+      - application/json
+      description: This API for getting list of task
+      parameters:
+      - description: Page
+        in: query
+        name: page
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ListResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.StandardErrorModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.StandardErrorModel'
+      summary: TaskList
+      tags:
+      - task
+  /v1/tasks/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: This API for deleting task
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.StandardErrorModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.StandardErrorModel'
+      summary: DeleteTask
+      tags:
+      - task
+    get:
+      consumes:
+      - application/json
+      description: This API for getting task detail
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Task'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.StandardErrorModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.StandardErrorModel'
+      summary: TaskGet
+      tags:
+      - task
+    put:
+      consumes:
+      - application/json
+      description: This API for updating task
+      parameters:
+      - description: taskUpdateRequest
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.TaskCreat'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Task'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.StandardErrorModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.StandardErrorModel'
+      summary: TastUpdate
+      tags:
+      - task
+swagger: "2.0"

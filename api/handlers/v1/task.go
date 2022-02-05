@@ -13,8 +13,17 @@ import (
 	"github.com/sulton0011/api-gateway/pkg/utils"
 )
 
-// CreateTask creates task
-// route /v1/tasks [post]
+// TaskCreat creates task
+// @Summary TaskCreat
+// @Description This API for creating a new task
+// @Tags task
+// @Accept json
+// @Produce json
+// @Param Task reques body model.TaskCreat true "taskCreateRequest"
+// @Success 200 {object} model.Task
+// @Failure 400 {object} model.StandardErrorModel
+// @Failure 500 {object} model.StandardErrorModel
+// @Router /v1/tasks [post]
 func (h *handlerV1) CreateTask(c *gin.Context) {
 	var (
 		body        pb.Task
@@ -46,7 +55,16 @@ func (h *handlerV1) CreateTask(c *gin.Context) {
 }
 
 // GetTask gets Task by id
-// route /v1/Tasks/{id} [get]
+// @Summary TaskGet
+// @Description This API for getting task detail
+// @Tags task
+// @Accept json
+// @Produce json
+// @Param id path string true "ID"
+// @Success 200 {object} model.Task
+// @Failure 400 {object} model.StandardErrorModel
+// @Failure 500 {object} model.StandardErrorModel
+// @Router /v1/tasks/{id} [get]
 func (h *handlerV1) GetTask(c *gin.Context) {
 	var jspbMarshal protojson.MarshalOptions
 	jspbMarshal.UseProtoNames = true
@@ -71,7 +89,17 @@ func (h *handlerV1) GetTask(c *gin.Context) {
 }
 
 // ListTasks returns list of Tasks
-// route /v1/Tasks/ [get]
+// @Summary TaskList
+// @Description This API for getting list of task
+// @Tags task
+// @Accept json
+// @Produce json
+// @Param page query string false "Page"
+// @Param limit query string false "limit"
+// @Success 200 {object} model.ListResp
+// @Failure 400 {object} model.StandardErrorModel
+// @Failure 500 {object} model.StandardErrorModel
+// @Router /v1/tasks/ [get]
 func (h *handlerV1) ListTasks(c *gin.Context) {
 	queryParams := c.Request.URL.Query()
 
@@ -107,7 +135,16 @@ func (h *handlerV1) ListTasks(c *gin.Context) {
 }
 
 // UpdateTask updates Task by id
-// route /v1/Tasks/{id} [put]
+// @Summary TastUpdate
+// @Description This API for updating task
+// @Tags task
+// @Accept json
+// @Produce json
+// @Param Task request body model.TaskCreat true "taskUpdateRequest"
+// @Success 200 {object} model.Task
+// @Failure 400 {object} model.StandardErrorModel
+// @Failure 500 {object} model.StandardErrorModel
+// @Router /v1/tasks/{id} [put]
 func (h *handlerV1) UpdateTask(c *gin.Context) {
 	var (
 		body        pb.Task
@@ -141,7 +178,16 @@ func (h *handlerV1) UpdateTask(c *gin.Context) {
 }
 
 // DeleteTask deletes Task by id
-// route /v1/Tasks/{id} [delete]
+// @Summary DeleteTask
+// @Description This API for deleting task
+// @Tags task
+// @Accept json
+// @Produce json
+// @Param id path string true "ID"
+// @Success 200
+// @Failure 400 {object} model.StandardErrorModel
+// @Failure 500 {object} model.StandardErrorModel
+// @Router /v1/tasks/{id} [delete]
 func (h *handlerV1) DeleteTask(c *gin.Context) {
 	var jspbMarshal protojson.MarshalOptions
 	jspbMarshal.UseProtoNames = true

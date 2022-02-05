@@ -27,7 +27,7 @@ func Load() Config {
 	c.Environment = cast.ToString(getOrReturnDefault("ENVIRONMENT", "develop"))
 
 	c.LogLevel = cast.ToString(getOrReturnDefault("LOG_LEVEL", "debug"))
-	c.HTTPPort = cast.ToString(getOrReturnDefault("HTTP_PORT", ":8080"))
+	c.HTTPPort = cast.ToString(getOrReturnDefault("HTTP_PORT", ":1000"))
 	c.TaskServiceHost = cast.ToString(getOrReturnDefault("TASK_SERVICE_HOST", "localhost"))
 	c.TaskServicePort = cast.ToInt(getOrReturnDefault("TASK_SERVICE_PORT", 9000))
 
